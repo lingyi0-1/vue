@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app-1">
+        <span>Message: {{msg0}}</span><br/>
+        <span v-once>这里的值永远不会改变：{{msg1}}</span>
+        <p>使用双花括号语法：{{rawhtml}}</p>
+        <p>使用v-html指令：<span v-html="rawhtml"></span></p>
+        <div v-bind:id="dynamicId"></div>
+        <button v-bind:disabled="isButtonDisabled">Button</button>
+        <p>{{number + 1}}{{ok?'Yes':'No'}}</p>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+       el: '#app-1',
+       data: {
+           msg0: 'number1',
+           msg1: 'number2',
+           rawhtml: '<span style="color: red">This should be red</span>',
+           dynamicId: '1234',
+           isButtonDisabled: 'null',
+           number: '45',
+           ok: 'false'
+       }
+    });
+</script>
+</html>

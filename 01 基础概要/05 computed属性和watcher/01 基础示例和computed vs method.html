@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="example">
+        <p>初始message是：“{{message}}”</p>
+        <p>计算后翻转的message是：“{{reversedMessage}}”</p>
+    </div>
+
+    <div id="example1">
+        <p>now:{{now}}</p>
+        <p>computed:{{cnow}}</p>
+        <p>method:{{mnow()}}</p>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: '#example',
+        data:{
+            message: 'Hello'
+        },
+        computed: {
+            reversedMessage: function(){
+                return this.message.split('').reverse().join('');
+            }
+        }
+    })
+
+    var vm1 = new Vue({
+        el: '#example1',
+        data: {
+            now: Date.now()
+        },
+        computed: {
+            cnow: function(){
+                return Date.now();
+            }
+        },
+        methods: {
+            mnow: function(){
+                return Date.now();
+            }
+        }
+    })
+</script>
+</html>

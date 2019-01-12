@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <component-a></component-a>
+        <component-b></component-b>
+        <component-c></component-c>
+    </div>
+</body>
+<script>
+    Vue.component('component-a',{
+        template:`
+            <div>
+                <p>component-a</p>
+                <component-b></component-b>
+            </div>
+
+        `
+    });
+
+    Vue.component('component-b',{
+        template:`
+            <div>
+                <p>component-b</p>
+                <component-c></component-c>
+            </div>
+        `
+    });
+
+    Vue.component('component-c',{
+        template:`
+            <p>component-c</p>
+        `
+    });
+
+    var vm = new Vue({
+        el: '#app',
+        data:{
+
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div :style="{fontSize: postFontSize + 'em'}">
+            <blog-post
+                    v-for="post in posts"
+                    v-bind:post="post"
+                    v-on:enlarge-text="postFontSize += $event"></blog-post>
+        </div>
+
+    </div>
+</body>
+<script>
+    Vue.component('blog-post',{
+        props: ['post'],
+        template:`
+            <div>
+                <h3>{{post.title}}</h3>
+                <button v-on:click="$emit('enlarge-text',0.1)">放大文本</button>
+                <div>{{post.content}}</div>
+            </div>
+        `
+    });
+
+    var vm = new Vue({
+        el: '#app',
+        data:{
+            posts: [
+                {id: 1, title: '我的Vue旅程', content: '第1篇'},
+                {id: 1, title: '用Vue写博客', content: '第2篇'},
+                {id: 1, title: 'Vue如此有趣', content: '第3篇'}
+            ],
+            postFontSize: 1
+        }
+    })
+</script>
+</html>

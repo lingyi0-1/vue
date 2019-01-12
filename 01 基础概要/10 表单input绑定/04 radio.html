@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="radio" id="one" v-bind:value="a" v-model="picked">
+        <label for="one">One</label>
+        <br>
+        <input type="radio" id="two" v-bind:value="b" v-model="picked">
+        <label for="two">Two</label>
+        <br>
+        <span>选中的是：{{picked}}</span>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data:{
+            picked: '',
+            a: 'One',
+            b: 'Two'
+        }
+    })
+</script>
+</html>

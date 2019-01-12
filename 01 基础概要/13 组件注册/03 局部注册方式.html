@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <component-a></component-a>
+        <component-b></component-b>
+        <component-c></component-c>
+    </div>
+</body>
+<script>
+    var ComponentA = {
+
+        template:`
+                 <p>component-a</p>
+        `
+    };
+
+    var ComponentB = {
+        components: {
+            'component-a': ComponentA
+        },
+        template:`
+                <div>
+                    <p>component-b</p>
+                    <component-a></component-a>
+                </div>
+
+        `
+    };
+
+    var ComponentC = {
+        template:`
+                <p>component-c</p>`
+    };
+
+    var vm = new Vue({
+        el: '#app',
+        components:{
+            'component-a': ComponentA,
+            'component-b': ComponentB,
+            'component-c': ComponentC
+        }
+    })
+</script>
+</html>

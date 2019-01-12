@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+</head>
+<body>
+    <div id="watch-example">
+        <p>
+            问一个答案是 yes/no 的问题：
+            <input v-model="question">
+        </p>
+        <p>{{answer}}</p>
+    </div>
+</body>
+<script>
+    var watchExampleVM = new Vue({
+        el: '#watch-example',
+        data:{
+          question: '',
+          answer: '你先提出问题，我才能给你答案！',
+        },
+        watch: {
+            question: function(newQuestion,oldQuestion){
+                this.answer = "等待输入停止......";
+                this.debouncedGetAnswer();
+            }
+        },
+        created: function(){
+            this.debouncedGetAnswer = _.debounce(this.getAnswer,500);
+        },
+        methods:{
+            getAnswer: function(){
+                if (this.question.indexOf('?') === -1) {
+                    this.answer = '问题通常需要包含一个中文问号。;-)'
+                    return
+                }
+                this.answer = '思考中……'
+                var vm = this
+                axios.get('https://yesno.wtf/api')
+                    .then(function (response) {
+                        vm.answer = _.capitalize(response.data.answer)
+                    })
+                    .catch(function (error) {
+                        vm.answer = '错误！API 无法处理。' + error
+                    })
+            }
+        }
+    });
+</script>
+</html>

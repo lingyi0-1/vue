@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div v-on:click="gett">外部点击
+            <div v-on:click.stop="tz">内部点击</div>
+        </div>
+
+        <a href=""  v-on:click.prevent>点击</a>
+
+        <div v-on:click.capture="gett">外部点击5
+            <div v-on:click="tz">内部点击5
+                <div v-on:click="set">点击6</div>
+            </div>
+        </div>
+
+        <div v-on:click.self="gett">外部点击1
+            <div v-on:click="tz">内部点击2</div>
+        </div>
+
+        <div v-on:click.once="tz">once</div>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data:{
+            name: '张三'
+        },
+
+        methods: {
+            gett: function(e){
+                alert("111");
+                console.log(e.target);
+                this.name = '李四';
+            },
+
+            tz: function(e){
+                console.log(e.target);
+                alert("222");
+            },
+
+            set: function(e){
+                console.log(e.target);
+                alert("333");
+            }
+        }
+    })
+</script>
+</html>

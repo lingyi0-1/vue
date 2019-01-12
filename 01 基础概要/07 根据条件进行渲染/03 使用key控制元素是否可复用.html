@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <template v-if="loginType === 'username'">
+            <label>用户名</label>
+            <input placeholder="请输入用户名" key="username-input">
+        </template>
+        <template v-else>
+            <label>邮箱</label>
+            <input placeholder="请输入邮箱" key="email-input">
+        </template>
+        <button v-on:click="qiehuan">切换登录类型</button>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data:{
+            loginType: 'username',
+            sum: 0
+        },
+        methods:{
+            qiehuan: function(){
+                if(this.sum%2 == 0){
+                    this.loginType = '';
+                }else{
+                    this.loginType = 'username';
+                }
+                this.sum++;
+            }
+        }
+    })
+</script>
+</html>

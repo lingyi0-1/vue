@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button
+            v-for="tab in tabs"
+            v-on:click="currentTab = tab">{{tab}}</button>
+        <component v-bind:is="currentTabComponent"></component>
+    </div>
+</body>
+<script>
+    Vue.component('tab-home',{
+        template:`
+            <p>home组件</p>
+        `
+    });
+    Vue.component('tab-posts',{
+        template:`
+            <p>posts组件</p>
+        `
+    });
+    Vue.component('tab-archive',{
+        template:`
+            <p>archive组件</p>
+        `
+    });
+    var vm = new Vue({
+        el: '#app',
+        data:{
+            currentTab: 'home',
+            tabs:['home','posts','archive']
+        },
+        computed:{
+            currentTabComponent: function(){
+                return 'tab-' + this.currentTab
+            }
+        }
+    })
+</script>
+</html>
